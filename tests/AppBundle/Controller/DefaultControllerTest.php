@@ -2,17 +2,17 @@
 
 namespace Tests\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Tests\AppBundle\AbstractTestController;
 
-class DefaultControllerTest extends WebTestCase
+class DefaultControllerTest extends AbstractTestController
 {
     public function testIndex()
     {
-        $client = static::createClient();
+        $this->client->request('GET', '/');
 
-        $crawler = $client->request('GET', '/');
+        $crawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
+        $this->assertContains('Se connecter', $crawler->filter('.btn.btn-success')->text());
     }
 }
