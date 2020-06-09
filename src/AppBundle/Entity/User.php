@@ -39,6 +39,25 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="user")
+     */
+    private $task;
+
+    /**
+     * User constructor.
+     * @param $roles
+     */
+    public function __construct()
+    {
+        $this->roles = ['ROLE_USER'];
+    }
+
     public function getId()
     {
         return $this->id;
@@ -57,6 +76,20 @@ class User implements UserInterface
     public function getSalt()
     {
         return null;
+    }
+
+    /**
+     * Set roles.
+     *
+     * @param array $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     public function getPassword()
@@ -81,7 +114,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->roles;
     }
 
     public function eraseCredentials()
