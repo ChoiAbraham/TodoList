@@ -23,18 +23,18 @@ class TestDataFixtures extends AbstractFixture
             $user->setRoles(['ROLE_USER']);
 
             $manager->persist($user);
-        }
 
-        for ($i = 0; $i <= 3; $i++) {
-            $task = new Task();
+            for ($y = 0; $y <= 3; $y++) {
+                $task = new Task();
 
-            $task->setTitle($faker->title);
-            $task->setContent($faker->text);
-            $task->setCreatedAt(new \DateTime());
+                $task->setTitle('title' . $y);
+                $task->setContent($faker->text);
+                $task->setCreatedAt(new \DateTime());
 
-            $task->setUser($user);
+                $task->setUser($user);
 
-            $manager->persist($task);
+                $manager->persist($task);
+            }
         }
 
         $manager->flush();
