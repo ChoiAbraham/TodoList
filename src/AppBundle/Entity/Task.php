@@ -36,6 +36,11 @@ class Task
     private $content;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="task")
+     */
+    private $user;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isDone;
@@ -89,5 +94,13 @@ class Task
     public function toggle($flag)
     {
         $this->isDone = $flag;
+    }
+
+    /**
+     * @param $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
     }
 }

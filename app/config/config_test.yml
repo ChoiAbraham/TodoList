@@ -5,6 +5,7 @@ framework:
     test: ~
     session:
         storage_id: session.storage.mock_file
+        name: MOCKSESSION
     profiler:
         collect: false
 
@@ -14,3 +15,12 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        url: 'sqlite:///%kernel.root_dir%/test.sqlite'
+        charset: UTF8
+
+# app/config/config_test.yml
+liip_functional_test: ~
