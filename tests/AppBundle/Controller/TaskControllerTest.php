@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\AppBundle\Controller;
 
 use AppBundle\DataFixtures\ORM\TestDataFixtures;
@@ -30,6 +29,7 @@ class TaskControllerTest extends AbstractTestController
     {
         $this->logUser();
         $crawler = $this->client->request('GET', '/tasks');
+
         $this->assertSame(1, $crawler->filter('html:contains("Créer une tâche")')->count());
     }
 
