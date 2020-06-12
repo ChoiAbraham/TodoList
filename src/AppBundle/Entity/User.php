@@ -90,7 +90,6 @@ class User implements UserInterface
         $this->id = $id;
     }
 
-
     /**
      * @return string|null
      */
@@ -98,7 +97,6 @@ class User implements UserInterface
     {
         return $this->username;
     }
-
 
     /**
      * @param $username
@@ -110,7 +108,6 @@ class User implements UserInterface
         return $this;
     }
 
-
     /**
      * @return string|null
      */
@@ -118,7 +115,6 @@ class User implements UserInterface
     {
         return $this->password;
     }
-
 
     /**
      * @param $password
@@ -128,7 +124,6 @@ class User implements UserInterface
         $this->password = $password;
     }
 
-
     /**
      * @return string|null
      */
@@ -136,7 +131,6 @@ class User implements UserInterface
     {
         return $this->email;
     }
-
 
     /**
      * @param $email
