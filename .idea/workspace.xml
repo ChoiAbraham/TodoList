@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="73aedf5a-3cb8-4ba0-a6a5-ca1872931fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/app/test.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/UserType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/AppBundle/Controller/TaskControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/AppBundle/Controller/TaskControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +166,8 @@
       <updated>1591550516192</updated>
       <workItem from="1591550517750" duration="2870000" />
       <workItem from="1591700347167" duration="7542000" />
-      <workItem from="1591796823783" duration="5959000" />
+      <workItem from="1591796823783" duration="6265000" />
+      <workItem from="1591962278645" duration="1830000" />
     </task>
     <servers />
   </component>
@@ -189,10 +187,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1591550795355" />
-    <state x="664" y="326" key="com.intellij.ide.util.TipDialog" timestamp="1591797101642">
+    <state x="664" y="326" key="com.intellij.ide.util.TipDialog" timestamp="1591962286476">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="664" y="326" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591797101642" />
+    <state x="664" y="326" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591962286476" />
     <state x="656" y="118" width="607" height="804" key="find.popup" timestamp="1591799676364">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
