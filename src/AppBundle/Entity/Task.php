@@ -51,37 +51,66 @@ class Task
         $this->isDone = false;
     }
 
+    /*
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    public function getCreatedAt()
+    /**
+     * @param $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getCreatedAt(): \Datetime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt($createdAt)
+    /**
+     * @param \Datetime $createdAt
+     */
+    public function setCreatedAt(\Datetime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle()
     {
         return $this->title;
     }
 
-    public function setTitle($title)
+    /**
+     * @param $title
+     */
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent()
     {
         return $this->content;
     }
 
-    public function setContent($content)
+    /**
+     * @param $content
+     */
+    public function setContent($content): void
     {
         $this->content = $content;
     }
@@ -94,6 +123,14 @@ class Task
     public function toggle($flag)
     {
         $this->isDone = $flag;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**

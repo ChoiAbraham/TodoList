@@ -58,25 +58,90 @@ class User implements UserInterface
         $this->roles = ['ROLE_USER'];
     }
 
-    public function getId()
+    /**
+     * @return mixed
+     */
+    public function getTask()
+    {
+        return $this->task;
+    }
+
+    /**
+     * @param mixed $task
+     */
+    public function setTask($task): void
+    {
+        $this->task = $task;
+    }
+
+    /**
+    * @return int
+    */
+    public function getId(): int
     {
         return $this->id;
     }
 
+    /**
+     * @param $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+
+    /**
+     * @return string|null
+     */
     public function getUsername()
     {
         return $this->username;
     }
 
-    public function setUsername($username)
+
+    /**
+     * @param $username
+     */
+    public function setUsername($username): void
     {
         $this->username = $username;
-        return $this;
     }
 
-    public function getSalt()
+
+    /**
+     * @return string|null
+     */
+    public function getPassword()
     {
-        return null;
+        return $this->password;
+    }
+
+
+    /**
+     * @param $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+
+    /**
+     * @param $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
     }
 
     /**
@@ -93,32 +158,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    public function getSalt()
+    {
+        return null;
     }
 
     public function eraseCredentials()
