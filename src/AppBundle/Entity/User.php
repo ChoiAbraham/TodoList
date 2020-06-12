@@ -103,9 +103,11 @@ class User implements UserInterface
     /**
      * @param $username
      */
-    public function setUsername($username): void
+    public function setUsername($username)
     {
         $this->username = $username;
+
+        return $this;
     }
 
 
@@ -139,9 +141,10 @@ class User implements UserInterface
     /**
      * @param $email
      */
-    public function setEmail($email): void
+    public function setEmail($email)
     {
         $this->email = $email;
+        return $this;
     }
 
     /**

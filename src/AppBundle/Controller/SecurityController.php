@@ -5,9 +5,23 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 class SecurityController extends Controller
 {
+    /** @var Environment  */
+    private $environment;
+
+    /**
+     * Login constructor.
+     * @param Environment $environment
+     */
+    public function __construct(Environment $environment)
+    {
+        $this->environment = $environment;
+    }
+
     /**
      * @Route("/login", name="login")
      */
@@ -18,25 +32,12 @@ class SecurityController extends Controller
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
+        return new Response($this->environment->render(
+            'security/login.html.twig',
+            [
+                'last_username' => $lastUsername,
+                'error' => $error
+            ]
         ));
-    }
-
-    /**
-     * @Route("/login_check", name="login_check")
-     */
-    public function loginCheck()
-    {
-        // This code is never executed.
-    }
-
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logoutCheck()
-    {
-        // This code is never executed.
     }
 }
