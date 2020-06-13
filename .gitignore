@@ -2,6 +2,8 @@
 /build/
 /phpunit.xml
 .idea/
+app/data.sqlite
+app/test.sqlite
 /var/*
 !/var/cache
 /var/cache/*

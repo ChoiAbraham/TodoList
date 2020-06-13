@@ -4,18 +4,80 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use AppBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Twig\Environment;
 
 class UserController extends Controller
 {
+    /** @var Environment */
+    private $environment;
+
+    /** @var FlashBagInterface */
+    private $flashBag;
+
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    /** @var AuthorizationCheckerInterface */
+    private $authChecker;
+
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
+
+    /** @var FormFactoryInterface */
+    private $formFactory;
+
+    /** @var UserRepository */
+    private $userRepository;
+
+    /** @var UserPasswordEncoderInterface */
+    private $encoder;
+
+    /**
+     * UserController constructor.
+     * @param Environment $environment
+     * @param FlashBagInterface $flashBag
+     * @param EntityManagerInterface $entityManager
+     * @param AuthorizationCheckerInterface $authChecker
+     * @param UrlGeneratorInterface $urlGenerator
+     * @param FormFactoryInterface $formFactory
+     * @param UserRepository $userRepository
+     * @param UserPasswordEncoderInterface $encoder
+     */
+    public function __construct(Environment $environment, FlashBagInterface $flashBag, EntityManagerInterface $entityManager, AuthorizationCheckerInterface $authChecker, UrlGeneratorInterface $urlGenerator, FormFactoryInterface $formFactory, UserRepository $userRepository, UserPasswordEncoderInterface $encoder)
+    {
+        $this->environment = $environment;
+        $this->flashBag = $flashBag;
+        $this->entityManager = $entityManager;
+        $this->authChecker = $authChecker;
+        $this->urlGenerator = $urlGenerator;
+        $this->formFactory = $formFactory;
+        $this->userRepository = $userRepository;
+        $this->encoder = $encoder;
+    }
+
     /**
      * @Route("/users", name="user_list")
      */
     public function listAction()
     {
-        return $this->render('user/list.html.twig', ['users' => $this->getDoctrine()->getRepository('AppBundle:User')->findAll()]);
+        return new Response($this->environment->render(
+            'user/list.html.twig',
+                [
+                    'users' => $this->userRepository->findAll()
+                ]
+        ));
     }
 
     /**
@@ -24,24 +86,29 @@ class UserController extends Controller
     public function createAction(Request $request)
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->formFactory->create(UserType::class, $user);
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
+        if ($form->isValid() && $form->isSubmitted()) {
+            $password = $this->encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $em->persist($user);
-            $em->flush();
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
 
-            $this->addFlash('success', "L'utilisateur a bien été ajouté.");
+            $this->flashBag->add('success', "L'utilisateur a bien été ajouté.");
 
-            return $this->redirectToRoute('user_list');
+            return new RedirectResponse($this->urlGenerator->generate('user_list'));
         }
 
-        return $this->render('user/create.html.twig', ['form' => $form->createView()]);
+        return new Response(
+            $this->environment->render(
+                'user/create.html.twig',
+                [
+                    'form' => $form->createView()
+                ]
+            ));
     }
 
     /**
@@ -49,21 +116,27 @@ class UserController extends Controller
      */
     public function editAction(User $user, Request $request)
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->formFactory->create(UserType::class, $user);
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
+        if ($form->isValid() && $form->isSubmitted()) {
+            $password = $this->encoder->encodePassword($user, $user->getPassword());
+
             $user->setPassword($password);
+            $this->entityManager->flush();
 
-            $this->getDoctrine()->getManager()->flush();
+            $this->flashBag->add('success', "L'utilisateur a bien été modifié");
 
-            $this->addFlash('success', "L'utilisateur a bien été modifié");
-
-            return $this->redirectToRoute('user_list');
+            return new RedirectResponse($this->urlGenerator->generate('user_list'));
         }
 
-        return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
+        return new Response(
+            $this->environment->render(
+                'user/edit.html.twig',
+                [
+                    'form' => $form->createView(), 'user' => $user
+                ]
+            ));
     }
 }

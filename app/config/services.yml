@@ -7,3 +7,31 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  AppBundle\:
+    resource: '../../src/AppBundle/*'
+    exclude: '../../src/AppBundle/{Entity,Repository}'
+
+  AppBundle\Controller\:
+    resource: '../../src/AppBundle/Controller'
+    tags: ['controller.service_arguments']
+
+  AppBundle\Entity\User:
+    tags:
+      - {name: 'user.entity'}
+
+  AppBundle\Entity\Task:
+    tags:
+      - {name: 'task.entity'}
+
+  AppBundle\Repository\UserRepository:
+    tags:
+      - {name: 'user.repository'}
+
+  AppBundle\Repository\TaskRepositoy:
+    tags:
+      - {name: 'task.repositoy'}
