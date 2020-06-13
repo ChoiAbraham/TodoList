@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Twig\Environment;
 
 class TaskController extends Controller
@@ -37,6 +38,9 @@ class TaskController extends Controller
     /** @var FlashBagInterface */
     private $flashBag;
 
+    /** @var TokenStorageInterface */
+    private $tokenStorage;
+
     /**
      * TaskController constructor.
      * @param Environment $environment
@@ -45,8 +49,9 @@ class TaskController extends Controller
      * @param EntityManagerInterface $entityManager
      * @param UrlGeneratorInterface $urlGenerator
      * @param FlashBagInterface $flashBag
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(Environment $environment, TaskRepository $taskRepository, FormFactoryInterface $formFactory, EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, FlashBagInterface $flashBag)
+    public function __construct(Environment $environment, TaskRepository $taskRepository, FormFactoryInterface $formFactory, EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, FlashBagInterface $flashBag, TokenStorageInterface $tokenStorage)
     {
         $this->environment = $environment;
         $this->taskRepository = $taskRepository;
@@ -54,8 +59,8 @@ class TaskController extends Controller
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->flashBag = $flashBag;
+        $this->tokenStorage = $tokenStorage;
     }
-
 
     /**
      * @Route("/tasks", name="task_list")
@@ -80,8 +85,11 @@ class TaskController extends Controller
         $task = new Task();
         $form = $this->formFactory->create(TaskType::class, $task)->handleRequest($request);
 
+        $user =  $this->tokenStorage->getToken()->getUser();
+
         if ($form->isValid() && $form->isSubmitted()) {
 
+            $task->setUser($user);
             $this->entityManager->persist($task);
             $this->entityManager->flush();
 
