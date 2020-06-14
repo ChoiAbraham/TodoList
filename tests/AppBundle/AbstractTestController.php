@@ -38,4 +38,17 @@ class AbstractTestController extends WebTestCase
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
     }
+
+    protected function logAdmin()
+    {
+        $session = $this->client->getContainer()->get('session');
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username'=>'admin']);
+
+        $token = new UsernamePasswordToken($user, null, 'main', ['ROLE_ADMIN']);
+        $session->set('_security_'.'main', serialize($token));
+        $session->save();
+
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $this->client->getCookieJar()->set($cookie);
+    }
 }

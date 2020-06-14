@@ -4,12 +4,21 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Task;
 use AppBundle\Entity\User;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class DataFixtures extends AbstractFixture
+class DataFixtures extends AbstractFixture implements FixtureGroupInterface
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
@@ -37,6 +46,27 @@ class DataFixtures extends AbstractFixture
             $manager->persist($task);
         }
 
+        $userAdmin = new User();
+        $userAdmin->setEmail('admin@gmail.com');
+        $userAdmin->setUsername('admin');
+
+        $password = $this->encoder->encodePassword($userAdmin, 'admin');
+        $userAdmin->setPassword($password);
+        $userAdmin->setRoles(['ROLE_ADMIN']);
+        $manager->persist($userAdmin);
+
+        $task = new Task();
+        $task->setTitle('Title');
+        $task->setContent('content_admin');
+        $task->setCreatedAt(new \DateTime());
+        $task->setUser($userAdmin);
+        $manager->persist($task);
+
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['data'];
     }
 }
