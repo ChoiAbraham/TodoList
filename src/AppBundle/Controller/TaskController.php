@@ -161,9 +161,9 @@ class TaskController extends Controller
             $this->entityManager->flush();
 
             $this->flashBag->add('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
-
-            return new RedirectResponse($this->urlGenerator->generate('task_list'));
         }
+
+        return new RedirectResponse($this->urlGenerator->generate('task_list'));
     }
 
     /**
@@ -172,10 +172,12 @@ class TaskController extends Controller
      */
     public function deleteTaskAction(Task $task)
     {
-        $this->entityManager->remove($task);
-        $this->entityManager->flush();
+        if($this->checkRights($task)) {
+            $this->entityManager->remove($task);
+            $this->entityManager->flush();
 
-        $this->flashBag->add('success', 'La tâche a bien été supprimée.');
+            $this->flashBag->add('success', 'La tâche a bien été supprimée.');
+        }
 
         return new RedirectResponse($this->urlGenerator->generate('task_list'));
     }
@@ -189,12 +191,10 @@ class TaskController extends Controller
     private function checkRights(Task $task): bool
     {
         if ($task->getIsAnonymous()) {
-            // Task Has No User (isAnonymous), so Users cannot (return false) But Admin Can (return true)
+            // Task Has No User (isAnonymous), so Users cannot But Admin Can (return true)
             if($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
                 return true;
             }
-
-            return false;
         }
 
         // tasks are not anonymous, check if the User of the task match the User connected

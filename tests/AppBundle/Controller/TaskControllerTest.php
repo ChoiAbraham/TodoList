@@ -124,7 +124,7 @@ class TaskControllerTest extends AbstractTestController
     public function testSuccessDeleteAnonymousTaskAsAdmin()
     {
         $this->logAdmin();
-        $taskToDelete = $this->entityManager->getRepository(Task::class)->findOneBy(['isAnonymous' => 'true']);
+        $taskToDelete = $this->entityManager->getRepository(Task::class)->findOneBy(['isAnonymous' => true]);
 
         $this->client->request('DELETE', '/tasks/'.$taskToDelete->getId().'/delete');
 

@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="73aedf5a-3cb8-4ba0-a6a5-ca1872931fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/data.sqlite" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/test.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/app/test.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/DataFixtures/ORM/DataFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/DataFixtures/ORM/DataFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Task.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/TaskRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/TaskRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/DataFixtures/ORM/TestDataFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/DataFixtures/ORM/TestDataFixtures.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/AppBundle/Controller/TaskControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/AppBundle/Controller/TaskControllerTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -186,7 +183,7 @@
       <workItem from="1591700347167" duration="7542000" />
       <workItem from="1591796823783" duration="6265000" />
       <workItem from="1591962278645" duration="25318000" />
-      <workItem from="1592151364092" duration="9544000" />
+      <workItem from="1592151364092" duration="10175000" />
     </task>
     <servers />
   </component>
