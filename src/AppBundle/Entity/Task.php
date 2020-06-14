@@ -43,12 +43,33 @@ class Task
     /**
      * @ORM\Column(type="boolean")
      */
+    private $isAnonymous = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private $isDone;
 
     public function __construct()
     {
         $this->createdAt = new \Datetime();
         $this->isDone = false;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsAnonymous(): ?bool
+    {
+        return $this->isAnonymous;
+    }
+
+    /**
+     * @param boolean
+     */
+    public function setIsAnonymous($isAnonymous = false): void
+    {
+        $this->isAnonymous = $isAnonymous;
     }
 
     /*
