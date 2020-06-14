@@ -14,6 +14,14 @@ class TestDataFixtures extends AbstractFixture
     {
         $faker = Factory::create('fr_FR');
 
+        //tasks without users (anonymous)
+        $task = new Task();
+        $task->setTitle($faker->title);
+        $task->setContent($faker->text);
+        $task->setCreatedAt(new \DateTime());
+        $task->setIsAnonymous(true);
+        $manager->persist($task);
+
         for ($i = 0; $i <= 5; $i++) {
             $user = new User();
 

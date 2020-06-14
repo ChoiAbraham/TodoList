@@ -25,7 +25,7 @@ class TaskControllerTest extends AbstractTestController
         $this->assertSame(1, $crawler->filter('html:contains("Bienvenue sur Todo List")')->count());
     }
 
-    public function testListTasks()
+    public function testSuccessListTasksAsUser()
     {
         $this->logUser();
         $crawler = $this->client->request('GET', '/tasks');
@@ -33,7 +33,15 @@ class TaskControllerTest extends AbstractTestController
         $this->assertSame(1, $crawler->filter('html:contains("Créer une tâche")')->count());
     }
 
-    public function testCreateTask()
+    public function testFailListTasksWithoutAuthentification()
+    {
+        $this->client->request('GET', '/tasks');
+        $this->client->followRedirect();
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testCreateTaskAsUser()
     {
         $this->logUser();
         $crawler = $this->client->request('GET', '/tasks/create');
@@ -48,12 +56,36 @@ class TaskControllerTest extends AbstractTestController
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
 
         $crawler = $this->client->followRedirect();
+
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter('html:contains("La tâche a été bien été ajoutée.")')->count());
     }
 
-    public function testEditTask()
+    public function testCreateTaskFormAsUser()
+    {
+        $this->logUser();
+
+        $crawler = $this->client->request('GET', '/tasks/create');
+
+        $this->assertSame(1, $crawler->filter('html:contains("Retour à la liste des tâches")')->count());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testToggleStatutAsUser()
+    {
+        $this->logUser();
+
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'username1']);
+        $task = $this->entityManager->getRepository(Task::class)->findOneBy(['user' => $user->getId()]);
+        $this->client->request('GET', '/tasks/'.$task->getId().'/toggle');
+
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(1, $crawler->filter('html:contains("a bien été marquée comme")')->count());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testEditTaskAsUser()
     {
         $this->logUser();
 
@@ -75,25 +107,10 @@ class TaskControllerTest extends AbstractTestController
         $this->assertSame(1, $crawler->filter('html:contains("La tâche a bien été modifiée.")')->count());
     }
 
-    public function testCheckTaskIsDone()
+    public function testSuccessDeleteTaskAsUser()
     {
         $this->logUser();
 
-        $this->entityManager = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'username1']);
-        $task = $this->entityManager->getRepository(Task::class)->findOneBy(['user' => $user->getId()]);
-        $this->client->request('GET', '/tasks/'. $task->getId() . '/toggle');
-
-        $crawler = $this->client->followRedirect();
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $this->assertSame(1, $crawler->filter('html:contains("bien été marquée comme faite.")')->count());
-    }
-
-    public function testDeleteTask()
-    {
-        $this->logUser();
-
-        $this->entityManager = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'username1']);
         $taskToDelete = $this->entityManager->getRepository(Task::class)->findOneBy(['title' => 'title1', 'user' => $user->getId()]);
         $this->client->request('GET', '/tasks/'.$taskToDelete->getId().'/delete');
@@ -102,5 +119,46 @@ class TaskControllerTest extends AbstractTestController
 
         $crawler = $this->client->followRedirect();
         $this->assertSame(1, $crawler->filter('html:contains("La tâche a bien été supprimée.")')->count());
+    }
+
+    public function testSuccessDeleteAnonymousTaskAsAdmin()
+    {
+        $this->logAdmin();
+        $taskToDelete = $this->entityManager->getRepository(Task::class)->findOneBy(['isAnonymous' => true]);
+
+        $this->client->request('DELETE', '/tasks/'.$taskToDelete->getId().'/delete');
+
+        $crawler = $this->client->followRedirect();
+        $this->assertSame(1, $crawler->filter('html:contains("La tâche a bien été supprimée.")')->count());
+    }
+
+    public function testFailureDeleteTaskOfUser1AsUser2()
+    {
+        $this->logAdmin();
+
+        $crawler = $this->client->request('POST', '/tasks/create');
+
+        $form = $crawler->selectButton('Ajouter')->form();
+
+        $form['task[title]'] = 'TASK';
+        $form['task[content]'] = 'CONTENT';
+
+        $this->client->submit($form);
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->client->request('GET', '/logout');
+
+        $taskToDelete = $this->entityManager->getRepository(Task::class)->findOneBy(['title' => 'TASK']);
+
+        $this->logUser();
+        $this->client->request('DELETE', '/tasks/'.$taskToDelete->getId().'/delete');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testSuccessListTasksAsAdmin()
+    {
+        $this->logAdmin();
+
+        $crawler = $this->client->request('GET', '/tasks');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 }
