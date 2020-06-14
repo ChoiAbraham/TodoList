@@ -37,6 +37,20 @@ class TestDataFixtures extends AbstractFixture
             }
         }
 
+        $userAdmin = new User();
+        $userAdmin->setEmail('admin@email.com');
+        $userAdmin->setUsername('admin');
+        $userAdmin->setPassword('admin');
+        $userAdmin->setRoles(['ROLE_ADMIN']);
+        $manager->persist($userAdmin);
+
+        $task = new Task();
+        $task->setTitle('Title');
+        $task->setContent('content_admin');
+        $task->setCreatedAt(new \DateTime());
+        $task->setUser($userAdmin);
+        $manager->persist($task);
+
         $manager->flush();
     }
 }

@@ -2,6 +2,7 @@
 /build/
 /phpunit.xml
 .idea/
+.idea/workspace.xml
 app/data.sqlite
 app/test.sqlite
 /var/*
