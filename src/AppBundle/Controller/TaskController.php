@@ -72,6 +72,7 @@ class TaskController extends Controller
 
     /**
      * @Route("/tasks", name="task_list")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function listAction()
     {
