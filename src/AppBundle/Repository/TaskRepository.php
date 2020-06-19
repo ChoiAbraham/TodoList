@@ -20,14 +20,12 @@ class TaskRepository extends ServiceEntityRepository
 
     public function getAdminTasks(User $user)
     {
-        return $this->findBy(
-            [
-                'user' => [
-                    null,
-                    $user
-                ],
-                'isAnonymous' => true
-            ]);
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.user = :user')
+            ->setParameter('user', $user)
+            ->orWhere('a.isAnonymous = TRUE')
+            ->getQuery()
+            ->getResult();
     }
 
     public function getUserTasks(User $user)

@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73aedf5a-3cb8-4ba0-a6a5-ca1872931fae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Contributing.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/app/test.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/task/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/task/list.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/DataFixtures/ORM/TestDataFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/DataFixtures/ORM/TestDataFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/AppBundle/Controller/TaskControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/AppBundle/Controller/TaskControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/TaskRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/TaskRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,22 +134,23 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/AppBundle/Controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\todo\tests\AppBundle\Controller" />
-      <recent name="C:\wamp64\www\todo\src\AppBundle" />
-      <recent name="C:\wamp64\www\todo\tests\AppBundle" />
-      <recent name="C:\wamp64\www\todo\tests" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\todo\tests\AppBundle" />
       <recent name="C:\wamp64\www\todo\tests\Entity" />
       <recent name="C:\wamp64\www\todo\src" />
       <recent name="C:\wamp64\www\todo\src\AppBundle" />
       <recent name="C:\wamp64\www\todo\src\Controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\Renew\TodoList" />
+      <recent name="C:\wamp64\www\todo\tests\AppBundle\Controller" />
+      <recent name="C:\wamp64\www\todo\src\AppBundle" />
+      <recent name="C:\wamp64\www\todo\tests\AppBundle" />
+      <recent name="C:\wamp64\www\todo\tests" />
     </key>
   </component>
   <component name="RunManager">
@@ -184,6 +186,7 @@
       <workItem from="1591796823783" duration="6265000" />
       <workItem from="1591962278645" duration="25318000" />
       <workItem from="1592151364092" duration="10175000" />
+      <workItem from="1592404114426" duration="10217000" />
     </task>
     <servers />
   </component>
@@ -224,9 +227,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="118" width="607" height="804" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591799676364" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592094470474">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup" timestamp="1592569164163">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592569164163" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592094470474" />
   </component>
 </project>
