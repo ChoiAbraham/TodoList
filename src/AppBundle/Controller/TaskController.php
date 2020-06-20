@@ -104,7 +104,6 @@ class TaskController
         $user =  $this->tokenStorage->getToken()->getUser();
 
         if ($form->isValid() && $form->isSubmitted()) {
-
             $task->setUser($user);
             $task->setIsAnonymous(false);
 
@@ -156,7 +155,7 @@ class TaskController
      */
     public function toggleTaskAction(Task $task)
     {
-        if($this->checkRights($task)) {
+        if ($this->checkRights($task)) {
             $task->toggle(!$task->isDone());
             $this->entityManager->flush();
 
@@ -172,7 +171,7 @@ class TaskController
      */
     public function deleteTaskAction(Task $task)
     {
-        if($this->checkRights($task)) {
+        if ($this->checkRights($task)) {
             $this->entityManager->remove($task);
             $this->entityManager->flush();
 
@@ -192,7 +191,7 @@ class TaskController
     {
         if ($task->getIsAnonymous()) {
             // Task Has No User (isAnonymous), so Users cannot But Admin Can (return true)
-            if($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
                 return true;
             }
         }

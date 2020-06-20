@@ -74,7 +74,7 @@ class UserController
     {
         return new Response($this->environment->render(
             'user/list.html.twig',
-                [
+            [
                     'users' => $this->userRepository->findAll()
                 ]
         ));
@@ -109,7 +109,8 @@ class UserController
                 [
                     'form' => $form->createView()
                 ]
-            ));
+            )
+        );
     }
 
     /**
@@ -139,6 +140,7 @@ class UserController
                 [
                     'form' => $form->createView(), 'user' => $user
                 ]
-            ));
+            )
+        );
     }
 }
