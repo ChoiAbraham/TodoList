@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Environment;
 
 class UserController
@@ -44,6 +45,9 @@ class UserController
     /** @var UserPasswordEncoderInterface */
     private $encoder;
 
+    /** @var ValidatorInterface */
+    private $validator;
+
     /**
      * UserController constructor.
      * @param Environment $environment
@@ -54,8 +58,9 @@ class UserController
      * @param FormFactoryInterface $formFactory
      * @param UserRepository $userRepository
      * @param UserPasswordEncoderInterface $encoder
+     * @param ValidatorInterface $validator
      */
-    public function __construct(Environment $environment, FlashBagInterface $flashBag, EntityManagerInterface $entityManager, AuthorizationCheckerInterface $authChecker, UrlGeneratorInterface $urlGenerator, FormFactoryInterface $formFactory, UserRepository $userRepository, UserPasswordEncoderInterface $encoder)
+    public function __construct(ValidatorInterface $validator, Environment $environment, FlashBagInterface $flashBag, EntityManagerInterface $entityManager, AuthorizationCheckerInterface $authChecker, UrlGeneratorInterface $urlGenerator, FormFactoryInterface $formFactory, UserRepository $userRepository, UserPasswordEncoderInterface $encoder)
     {
         $this->environment = $environment;
         $this->flashBag = $flashBag;
@@ -65,6 +70,7 @@ class UserController
         $this->formFactory = $formFactory;
         $this->userRepository = $userRepository;
         $this->encoder = $encoder;
+        $this->validator = $validator;
     }
 
     /**
@@ -87,7 +93,11 @@ class UserController
     public function createAction(Request $request)
     {
         $user = new User();
-        $form = $this->formFactory->create(UserType::class, $user);
+        $form = $this->formFactory->create(UserType::class, $user,
+            [
+                'validation_groups' => ['Default', 'Registration'],
+            ]
+        );
 
         $form->handleRequest($request);
 
@@ -107,7 +117,7 @@ class UserController
             $this->environment->render(
                 'user/create.html.twig',
                 [
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
                 ]
             )
         );
@@ -119,15 +129,22 @@ class UserController
      */
     public function editAction(User $user, Request $request)
     {
-        $form = $this->formFactory->create(UserType::class, $user);
+        $form = $this->formFactory->create(UserType::class, $user,
+            [
+                'validation_groups' => ['Default'],
+            ]
+        );
 
         $form->handleRequest($request);
 
         if ($form->isValid() && $form->isSubmitted()) {
-            $password = $this->encoder->encodePassword($user, $user->getPassword());
+            $password = $form->getData()->getPassword();
+            if ($password !== null) {
+                $password = $this->encoder->encodePassword($user, $user->getPassword());
 
-            $user->setPassword($password);
-            $this->entityManager->flush();
+                $user->setPassword($password);
+                $this->entityManager->flush();
+            }
 
             $this->flashBag->add('success', "L'utilisateur a bien été modifié");
 
