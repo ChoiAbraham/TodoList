@@ -2,7 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73aedf5a-3cb8-4ba0-a6a5-ca1872931fae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/todo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/todo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/task/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/task/create.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/test.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/app/test.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/symfony_requirements" beforeDir="false" afterPath="$PROJECT_DIR$/bin/symfony_requirements" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/dev/swiftmailer.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/prod/doctrine.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security_checker.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/sensio_framework_extra.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/test/swiftmailer.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes/annotations.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/test-coverage/AppBundle/AppBundle.php.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/test-coverage/AppBundle/Controller/dashboard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/test-coverage/AppBundle/Controller/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/test-coverage/AppBundle/dashboard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/test-coverage/AppBundle/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/test-coverage/dashboard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/test-coverage/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/UserType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/SymfonyRequirements.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/SymfonyRequirements.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/config.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,6 +211,7 @@
       <workItem from="1592404114426" duration="11424000" />
       <workItem from="1592604486717" duration="3399000" />
       <workItem from="1592616315867" duration="4065000" />
+      <workItem from="1592725739565" duration="4488000" />
     </task>
     <servers />
   </component>
@@ -233,10 +260,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="118" width="607" height="804" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591799676364" />
-    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup" timestamp="1592632571947">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592728303350">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="498" y="178" width="672" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1592632571947" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592094470474" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592728303350" />
   </component>
 </project>
