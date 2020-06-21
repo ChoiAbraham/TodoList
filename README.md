@@ -1,6 +1,8 @@
 ToDoList
 ========
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6504c99c00c04146b09cc3d6a9b13117)](https://www.codacy.com/manual/choi.abri/TodoList_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ChoiAbraham/TodoList&amp;utm_campaign=Badge_Grade)
+
 * Symfony 3.4 framework
 * CSS : Bootstrap 4
 
