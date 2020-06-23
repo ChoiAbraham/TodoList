@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class DefaultController extends Controller
+class DefaultController
 {
     /** @var Environment  */
     private $environment;

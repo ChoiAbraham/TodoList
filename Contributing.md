@@ -46,7 +46,7 @@ phpcbf
 Tests are to be valid before pull requests (on windows)
 ```
 ./vendor/bin/phpunit.bat
-```
+```cr
 
 
 ##How to Pull Request
